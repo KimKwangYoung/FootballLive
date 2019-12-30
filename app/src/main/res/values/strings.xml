@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FootballLive</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="naver_maps_api_base_url">https://naveropenapi.apigw.ntruss.com/map-geocode/v2/</string>
+    <string name="naver_map_api_client_key">rxggft3qhw</string>
+
+</resources>
