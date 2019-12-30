@@ -223,11 +223,11 @@ public class TeamFragment extends Fragment {
                 sortMatch();
             }else{
                 matchLinearLayout.setVisibility(View.INVISIBLE);
-                blindLinearLayout.setVisibility(View.VISIBLE);
+                matchHideLinearLayout.setVisibility(View.VISIBLE);
             }
         }catch (NullPointerException e){
             matchLinearLayout.setVisibility(View.INVISIBLE);
-            blindLinearLayout.setVisibility(View.VISIBLE);
+            matchHideLinearLayout.setVisibility(View.VISIBLE);
             Log.e(TAG, "checkReadyMatch() - catch문 실행");
         }
     }
