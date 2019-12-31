@@ -132,6 +132,7 @@ public class CreateRecruitingActivity extends AppCompatActivity {
         recruiting.setTeamKey(team.getTeam_key());
         recruiting.setUniform(uniform);
         recruiting.setTeamName(team.getTeam_name());
+        recruiting.setRecruiting_key(recruitingKey);
 
         Date now = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
