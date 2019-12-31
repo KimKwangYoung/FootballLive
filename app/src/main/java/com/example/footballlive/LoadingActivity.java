@@ -26,7 +26,6 @@ public class LoadingActivity extends BaseActivity {
     DatabaseReference mDatabase;
     FirebaseUser fUser;
     TextView loadingTextView;
-    Handler handler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,13 +58,13 @@ public class LoadingActivity extends BaseActivity {
     }
 
     private void getFCMServerKey(){
-        mDatabase.child("FCM").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("ServerKey").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot d : dataSnapshot.getChildren()){
-                    if(d.getKey().equals("ServerKey")){
+                    if(d.getKey().equals("fcmKey")){
                         fcmSeverKey = d.getValue(String.class);
-                    }else if(d.getKey().equals("NaverApiSecretKey")){
+                    }else if(d.getKey().equals("naverApiSecretKey")){
                         naverApiSecretKey = d.getValue(String.class);
                     }
                 }
