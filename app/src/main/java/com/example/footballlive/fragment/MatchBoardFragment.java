@@ -171,7 +171,6 @@ public class MatchBoardFragment extends Fragment {
             }
         });
         final AlertDialog joinDialog = joinDialog_builder.create();
-        joinDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.GREEN));
         joinDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
