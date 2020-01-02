@@ -61,16 +61,17 @@ public class RecruitingAdapter extends RecyclerView.Adapter<RecruitingAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView recruitingTitleTextView, recruitingStadiumTextView, recruitingTeamNameTextView, recruitingUniformTextView;
+        TextView titleTextView, stadiumTextView, teamNameTextView, uniformTextView, creationTimeTextView;
         CardView recruitingCardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             recruitingCardView = itemView.findViewById(R.id.recruiting_card_cv);
-            recruitingTitleTextView = itemView.findViewById(R.id.recruiting_card_title_tv);
-            recruitingTeamNameTextView = itemView.findViewById(R.id.recruiting_card_team_name_tv);
-            recruitingUniformTextView = itemView.findViewById(R.id.recruiting_card_uniform_tv);
-            recruitingStadiumTextView = itemView.findViewById(R.id.recruiting_card_stadium_tv);
+            titleTextView = itemView.findViewById(R.id.recruiting_card_title_tv);
+            teamNameTextView = itemView.findViewById(R.id.recruiting_card_team_name_tv);
+            uniformTextView = itemView.findViewById(R.id.recruiting_card_uniform_tv);
+            stadiumTextView = itemView.findViewById(R.id.recruiting_card_stadium_tv);
+            creationTimeTextView = itemView.findViewById(R.id.recruiting_card_creation_time_tv);
 
             recruitingCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -87,10 +88,11 @@ public class RecruitingAdapter extends RecyclerView.Adapter<RecruitingAdapter.Vi
 
         public void setItem(Recruiting recruiting) {
 
-            recruitingTitleTextView.setText(recruiting.getTitle());
-            recruitingTeamNameTextView.setText(recruiting.getTeamName());
-            recruitingStadiumTextView.setText(recruiting.getStadium());
-            recruitingUniformTextView.setText("유니폼 " + recruiting.getUniform());
+            titleTextView.setText(recruiting.getTitle());
+            teamNameTextView.setText(recruiting.getTeamName());
+            stadiumTextView.setText(recruiting.getStadium());
+            uniformTextView.setText("유니폼 " + recruiting.getUniform());
+            creationTimeTextView.setText(recruiting.getCreationTime());
         }
 
     }

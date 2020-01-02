@@ -8,7 +8,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/recruiting_card_cv"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="wrap_content"
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
@@ -35,21 +35,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/recruiting_card_stadium_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/recruiting_card_uniform_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recruiting_card_creation_time_tv"
+                android:gravity="right"
+                android:textSize="12sp"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>
