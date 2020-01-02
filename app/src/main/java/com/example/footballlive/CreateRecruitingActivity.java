@@ -127,7 +127,11 @@ public class CreateRecruitingActivity extends AppCompatActivity {
         String recruitingKey = mRef.child("recruiting").child(region).push().getKey();
         recruiting.setTitle(titleEditText.getText().toString());
         recruiting.setContent(contentEditText.getText().toString());
-        recruiting.setStadium(team.getTeam_stadium_address());
+        if(team.getTeam_stadium_address() != null) {
+            recruiting.setStadium(team.getTeam_stadium_address());
+        }else{
+            recruiting.setStadium("구장 미보유");
+        }
         recruiting.setDues(duesEditText.getText().toString());
         recruiting.setTeamKey(team.getTeam_key());
         recruiting.setUniform(uniform);
