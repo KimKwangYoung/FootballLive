@@ -208,6 +208,7 @@ public class CreateTeamActivity extends BaseActivity {
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(CreateTeamActivity.this, "팀 생성이 완료 되었습니다!", Toast.LENGTH_SHORT).show();
                             team = myTeam;
+                            user.setTeamid(myTeam.getTeam_key());
 //                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 //                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             finish();
