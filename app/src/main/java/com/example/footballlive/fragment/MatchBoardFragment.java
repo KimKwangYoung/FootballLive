@@ -3,8 +3,6 @@ package com.example.footballlive.fragment;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -56,7 +54,7 @@ public class MatchBoardFragment extends Fragment {
 
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
 
-    String teamID, region, matchDay;
+    String teamID, region, mMatchDay;
     LinkedHashMap<String, MatchPost> matchList = new LinkedHashMap<>();
     MatchBoardAdapter matchAdapter;
 
@@ -111,7 +109,7 @@ public class MatchBoardFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position > 0){
-                    if(matchDay != null){
+                    if(mMatchDay != null){
                         region = regionCheck(position);
                         getMatchList();
                     }else{
@@ -148,8 +146,8 @@ public class MatchBoardFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if(region != null){
-            if(matchDay != null) {
-                String[] dayArry = matchDay.split("-");
+            if(mMatchDay != null) {
+                String[] dayArry = mMatchDay.split("-");
                 dateButton.setText(dayArry[0] + "년 " + dayArry[1] + "월 " + dayArry[2] + "일");
                 showPlayList();
             }
@@ -187,7 +185,7 @@ public class MatchBoardFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    if (matchDay.equals(ds.getValue(MatchPost.class).getMatchday())) {
+                    if (mMatchDay.equals(ds.getValue(MatchPost.class).getMatchday())) {
                         matchList.put(ds.getKey(), ds.getValue(MatchPost.class));
                     }
                 }
@@ -267,12 +265,24 @@ public class MatchBoardFragment extends Fragment {
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                if(dayOfMonth < 10) {
-                    matchDay = year + "-" + (month + 1) + "-0" + dayOfMonth;
+                String matchMonth = null;
+                String matchDay = null;
+
+                if((month+1) < 10){
+                    matchMonth = "0"+(month+1);
                 }else{
-                    matchDay = year + "-" + (month + 1) + "-" + dayOfMonth;
-                }
-                String[] dayArry = matchDay.split("-");
+                    matchMonth = Integer.toString(month+1);
+                } // month 문자열 변환
+
+                if(dayOfMonth < 10){
+                    matchDay = "0"+dayOfMonth;
+                }else{
+                    matchDay = Integer.toString(dayOfMonth);
+                } // dayOfMonth 문자열 변환
+
+                mMatchDay = year + "-" + matchMonth + "-" + matchDay;
+
+                String[] dayArry = mMatchDay.split("-");
                 dateButton.setText(dayArry[0] + "년 " + dayArry[1] + "월 " + dayArry[2] + "일");
                 getMatchList();
             }

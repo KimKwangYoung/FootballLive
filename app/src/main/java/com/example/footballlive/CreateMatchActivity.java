@@ -173,13 +173,24 @@ public class CreateMatchActivity extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                if(dayOfMonth < 10){
-                    strMatchDay = year + "-" + (month+1) + "-0" + dayOfMonth;
-                }else {
-                    strMatchDay = year + "-" + (month + 1) + "-" + dayOfMonth;
-                }
+                String matchMonth = null;
+                String matchDay = null;
 
+                if((month+1) < 10){
+                    matchMonth = "0"+(month+1);
+                }else{
+                    matchMonth = Integer.toString(month+1);
+                } // month 문자열 변환
+
+                if(dayOfMonth < 10){
+                    matchDay = "0"+dayOfMonth;
+                }else{
+                    matchDay = Integer.toString(dayOfMonth);
+                } // dayOfMonth 문자열 변환
+
+                strMatchDay = year + "-" + matchMonth + "-" + matchDay;
                 matchDayButton.setText(strMatchDay);
+
             }
         },c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
 
