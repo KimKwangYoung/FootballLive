@@ -18,6 +18,7 @@ import com.example.footballlive.data.User;
 import static com.example.footballlive.BaseActivity.myToken;
 import static com.example.footballlive.BaseActivity.user;
 
+import com.example.footballlive.dialog.LoadingDialog;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -85,7 +86,9 @@ public class JoinActivity extends AppCompatActivity {
                 boolean password_match = password.equals(passwordCheckEditText.getText().toString());
                 if (email != null && password != null && name != null && position != null) {
                     if(password_match) {
-                        createAccount(email, password, name, position);
+                        startThread();
+                        LoadingDialog loadingDialog = new LoadingDialog();
+                        loadingDialog.progressON(JoinActivity.this);
                     }else
                         showDialog("비밀번호 확인 불일치");
                 }else{
@@ -95,6 +98,15 @@ public class JoinActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void startThread(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                createAccount(email, password, name, position);
+            }
+        }).start();
     }
 
     /* 이메일 유효성 검사 */
