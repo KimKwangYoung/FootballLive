@@ -2,6 +2,8 @@ package com.example.footballlive.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,8 +91,17 @@ public class RecruitingAdapter extends RecyclerView.Adapter<RecruitingAdapter.Vi
         public void setItem(Recruiting recruiting) {
 
             titleTextView.setText(recruiting.getTitle());
-            teamNameTextView.setText(recruiting.getTeamName());
+            teamNameTextView.setText("<"+recruiting.getTeamName()+">");
             stadiumTextView.setText(recruiting.getStadium());
+            if(recruiting.getUniform().equals("제공")){
+                uniformTextView.setTextColor(Color.WHITE);
+                uniformTextView.setBackgroundColor(context.getResources().getColor(R.color.mainColor));
+                uniformTextView.setText("유니폼" + recruiting.getUniform());
+            }else if(recruiting.getUniform().equals("사비 구매")){
+                uniformTextView.setTextColor(Color.WHITE);
+                uniformTextView.setBackgroundColor(context.getResources().getColor(R.color.subColor));
+                uniformTextView.setText("유니폼" + recruiting.getUniform());
+            }
             uniformTextView.setText("유니폼 " + recruiting.getUniform());
             creationTimeTextView.setText(recruiting.getCreationTime());
         }
