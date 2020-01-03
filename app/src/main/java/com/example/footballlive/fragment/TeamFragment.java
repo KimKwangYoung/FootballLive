@@ -68,6 +68,7 @@ public class TeamFragment extends Fragment {
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
 
     @Nullable
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_team, container, false);
@@ -176,10 +177,10 @@ public class TeamFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        checkTeam();
+        updateUI();
 }
 
-    private void checkTeam() {
+    private void updateUI() {
 
         if(user == null){
             blindLinearLayout.setVisibility(View.VISIBLE);
@@ -193,21 +194,8 @@ public class TeamFragment extends Fragment {
             return;
         }
 
-//        try{
-//            if(!user.getTeamid().equals(team.getTeam_key())){
-//                getTeamData();
-//            }
-//        }catch (NullPointerException e){
-//            blindLinearLayout.setVisibility(View.VISIBLE);
-//            teamLinearLayout.setVisibility(View.INVISIBLE);
-//            return;
-//        }
-
         teamLinearLayout.setVisibility(View.VISIBLE);
         blindLinearLayout.setVisibility(View.INVISIBLE);
-
-//        blindLinearLayout.setVisibility(View.INVISIBLE);
-//        teamLinearLayout.setVisibility(View.VISIBLE);
 
         Log.e(TAG, "blindLinearLayout Check : " + blindLinearLayout.getVisibility());
         checkReadyMatch();
@@ -218,6 +206,11 @@ public class TeamFragment extends Fragment {
         try {
             if (mTeam.getReady_play() != null && !mTeam.getReady_play().isEmpty()) {
                 compareDate();
+                if(mTeam.getReady_play().isEmpty()){
+                    matchLinearLayout.setVisibility(View.VISIBLE);
+                    matchHideLinearLayout.setVisibility(View.INVISIBLE);
+                    return;
+                }
                 matchLinearLayout.setVisibility(View.VISIBLE);
                 matchHideLinearLayout.setVisibility(View.INVISIBLE);
                 sortMatch();
@@ -311,7 +304,7 @@ public class TeamFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                     switch (dialogCode){
                         case 1:
-                            checkTeam();
+                            updateUI();
                     }
             }
         });
@@ -388,12 +381,15 @@ public class TeamFragment extends Fragment {
             String matchTime = r.getMatchDay() + " " + r.getEndTime();
             Date matchDate = null;
             Log.e("matchTimeCheck", matchTime);
+
             try {
                 matchDate = simpleDateFormat.parse(matchTime);
             }catch (Exception e){
 
             }
+
             int compare = currentTime.compareTo(matchDate);
+
             if(compare > 0){
                 readyMatch = r;
 
@@ -411,7 +407,7 @@ public class TeamFragment extends Fragment {
                 transferReadyMatch(team_ready_match, team_match_result);
                 return;
             }
-        }
+        } //end for
     }
 
     private void transferReadyMatch(LinkedHashMap<String, ReadyMatch> rm, final LinkedHashMap<String, MatchResult> mr){
