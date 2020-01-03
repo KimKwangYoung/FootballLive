@@ -76,7 +76,7 @@ public class FootballLiveApplication extends Application {
             JSONObject dataObj = new JSONObject();
 
             dataObj.put("contents", contents);
-            dataObj.put("titleTextView", title);
+            dataObj.put("title", title);
             dataObj.put("channelId", channelID);
             requestData.put("data", dataObj);
             JSONArray idArray = new JSONArray();

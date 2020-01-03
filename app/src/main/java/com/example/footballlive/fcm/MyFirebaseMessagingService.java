@@ -1,4 +1,4 @@
-package com.example.footballlive;
+package com.example.footballlive.fcm;
 
 import android.app.Application;
 import android.app.NotificationChannel;
@@ -17,6 +17,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
+import com.example.footballlive.FootballLiveApplication;
+import com.example.footballlive.LoadingActivity;
+import com.example.footballlive.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -36,7 +39,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String from = remoteMessage.getFrom();
         Map<String, String> data = remoteMessage.getData();
         String contents = data.get("contents");
-        String title = data.get("titleTextView");
+        String title = data.get("title");
         String channelId = data.get("channelId");
         Log.e(TAG, "from : " + from + ", contents : " + contents);
         notiyfyMessage(getApplicationContext(), title, contents, channelId);
@@ -48,7 +51,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        Log.e(TAG, "titleTextView : " + title + " contents : " + contents);
+        Log.e(TAG, "title : " + title + " contents : " + contents);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, channelId)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle(title)
