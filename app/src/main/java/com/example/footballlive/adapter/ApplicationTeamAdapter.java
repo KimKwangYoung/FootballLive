@@ -175,7 +175,7 @@ public class ApplicationTeamAdapter extends RecyclerView.Adapter<ApplicationTeam
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 post = dataSnapshot.getValue(ShortPlay.class);
-                addHomeTeamReadyPlay(post, t);
+                addHomeTeamReadyMatch(post, t);
             }
 
             @Override
@@ -185,7 +185,7 @@ public class ApplicationTeamAdapter extends RecyclerView.Adapter<ApplicationTeam
         });
     }
 
-    public void addHomeTeamReadyPlay(ShortPlay post, final Team t){
+    public void addHomeTeamReadyMatch(ShortPlay post, final Team t){
         String matchDay = post.getMatchDay();
         String startTime = post.getStartTime();
         String endTime = post.getEndTime();
@@ -218,13 +218,13 @@ public class ApplicationTeamAdapter extends RecyclerView.Adapter<ApplicationTeam
                 String contents = "매치가 성사 되었습니다. 예정된 매치 목록을 확인해 보세요!";
                 t.setReady_play(myTeamReadyPlay);
                 sendFCM(title, contents, getTeamFCMTokens(team));
-                addAwayTeamReadyPlay(t, readyMatch);
+                addAwayTeamReadyMatch(t, readyMatch);
             }
         });
 
     }
 
-    public void addAwayTeamReadyPlay(final Team t, ReadyMatch readyMatch){
+    public void addAwayTeamReadyMatch(final Team t, ReadyMatch readyMatch){
         readyMatch.setOppentTeamName(team.getTeam_name());
         readyMatch.setOppentTeamKey(team.getTeam_key());
         readyMatch.setAllMember(t.getTeam_member());
